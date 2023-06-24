@@ -15,3 +15,6 @@ export class ProductCreateReq {
   geoLocation?: string;
   ownerID: string;
 }
+export class ProductEntityDTO{
+
+}

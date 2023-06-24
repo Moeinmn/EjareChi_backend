@@ -5,6 +5,10 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { PrismaService } from './insfrastructure/prisma/prisma.service';
 
 async function bootstrap() {
+
+  console.log(1111,process.env.DB_URL);
+  
+
   const app = await NestFactory.create(AppModule);
 
   const prismaService = app.get(PrismaService);
