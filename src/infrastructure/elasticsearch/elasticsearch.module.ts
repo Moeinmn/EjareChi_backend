@@ -6,4 +6,4 @@ import { ElasticsearchModule } from '@nestjs/elasticsearch';
       node: process.env.ELASTICSEARCH_URL,
     })],
 })
-export class SearchModule {}
+export class ElasticModule {}
