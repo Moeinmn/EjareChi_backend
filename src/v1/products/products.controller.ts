@@ -1,11 +1,12 @@
 import { Controller, ParseUUIDPipe, Get, Post, Delete } from '@nestjs/common';
-import { Body, Param, Query } from '@nestjs/common/decorators';
+import { Body, Param, Query, UploadedFile, UseInterceptors } from '@nestjs/common/decorators';
 import { ProductsService } from './products.service';
 import {
   ProductCreateReq,
   ProductEntity,
   ProductUpdateReq,
 } from './dtos/products.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller({
   path: 'products',
@@ -52,4 +53,11 @@ export class ProductsController {
   async deleteProduct(@Param('id', ParseUUIDPipe) id: string): Promise<string> {
     return await this.productsService.deleteProductService(id);
   }
+  //TODO: multipart/formdata end point
+  // @Post('signup')
+  // @UseInterceptors(FileInterceptor('<name of file here - asdasd in your screenshot>'))
+  // signup(@UploadedFile() file, @Body() body) {
+  // console.log(file);
+  // console.log(body);
+  // }
 }
