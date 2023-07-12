@@ -1,4 +1,5 @@
 import { Controller, ParseUUIDPipe, Get, Post, Delete } from '@nestjs/common';
+<<<<<<< HEAD
 import {
   Body,
   Param,
@@ -6,13 +7,20 @@ import {
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common/decorators';
+=======
+import { Body, Param, Query, UploadedFile, UseInterceptors } from '@nestjs/common/decorators';
+>>>>>>> 9ca901e86f39d46a0718f6868d97dd255a74c1f1
 import { ProductsService } from './products.service';
 import {
   ProductCreateReq,
   ProductEntity,
   ProductUpdateReq,
 } from './dtos/products.dto';
+<<<<<<< HEAD
 import { FilesInterceptor } from '@nestjs/platform-express';
+=======
+import { FileInterceptor } from '@nestjs/platform-express';
+>>>>>>> 9ca901e86f39d46a0718f6868d97dd255a74c1f1
 
 @Controller({
   path: 'products',
