@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { VersioningType, ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { PrismaService } from './infrastructure/prisma/prisma.service';
+import { LoggingInterceptor } from './logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +15,10 @@ async function bootstrap() {
     type: VersioningType.URI,
   });
 
+  //Enabling Global Middlewares
+  app.useGlobalInterceptors(new LoggingInterceptor());
+
+  //Enabling Prisma
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
 
