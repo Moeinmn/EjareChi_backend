@@ -20,9 +20,6 @@ export class ProductCreateReq {
   @IsString()
   @IsOptional()
   geoLocation?: string;
-
-  @IsString()
-  ownerID: string;
 }
 
 export class ProductUpdateReq {
