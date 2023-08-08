@@ -5,7 +5,7 @@ import {
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common/decorators';
-import { Controller, ParseUUIDPipe, Get, Post, Delete, UnauthorizedException,UseGuards } from '@nestjs/common';
+import { Controller, ParseUUIDPipe, Get, Post, Delete,Put, UnauthorizedException,UseGuards } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import {
   ProductCreateReq,
