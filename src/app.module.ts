@@ -10,7 +10,7 @@ import { UserInterceptor } from './v1/interceptors/user.interceptor';
 // import { SearchModule } from './infrastructure/elasticsearch/elasticsearch.module';
 import {APP_GUARD, APP_INTERCEPTOR} from "@nestjs/core"
 import { AuthGuard } from './guards/auth.guard';
-import { LoggerModule } from 'nestjs-pino';
+import { CustomLoggerModule } from './infrastructure/logger';
 
 
 
@@ -22,18 +22,7 @@ import { LoggerModule } from 'nestjs-pino';
     PrismaModule,
     AuthModule,
     ElasticModule,
-    LoggerModule.forRoot({
-      pinoHttp:{
-        transport : {
-          target : "pino-pretty",
-          options:{
-            singleLine : true
-          }
-        }
-
-      }
-    }
-    )
+    CustomLoggerModule
   ],
   controllers: [AppController],
   providers: [AppService,{
