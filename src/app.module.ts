@@ -8,12 +8,9 @@ import { PrismaModule } from './infrastructure/prisma/prisma.module';
 import { ElasticModule } from './infrastructure/elasticsearch/elasticsearch.module';
 import { UserInterceptor } from './v1/interceptors/user.interceptor';
 // import { SearchModule } from './infrastructure/elasticsearch/elasticsearch.module';
-import {APP_GUARD, APP_INTERCEPTOR} from "@nestjs/core"
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
 import { CustomLoggerModule } from './infrastructure/logger';
-
-
-
 
 @Module({
   imports: [
@@ -22,15 +19,19 @@ import { CustomLoggerModule } from './infrastructure/logger';
     PrismaModule,
     AuthModule,
     ElasticModule,
-    CustomLoggerModule
+    CustomLoggerModule,
   ],
   controllers: [AppController],
-  providers: [AppService,{
-    provide:APP_INTERCEPTOR,
-    useClass:UserInterceptor
-  },{
-    provide:APP_GUARD,
-    useClass:AuthGuard
-  }],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: UserInterceptor,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}

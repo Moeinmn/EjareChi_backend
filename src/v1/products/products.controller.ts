@@ -5,7 +5,16 @@ import {
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common/decorators';
-import { Controller, ParseUUIDPipe, Get, Post, Delete,Put, UnauthorizedException,UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  ParseUUIDPipe,
+  Get,
+  Post,
+  Delete,
+  Put,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { ProductsService } from './products.service';
 import {
   ProductCreateReq,
@@ -18,9 +27,6 @@ import { userType } from '@prisma/client';
 import { Roles } from '../decorators/roles.decorator';
 import { AuthGuard } from 'src/guards/auth.guard';
 
-
-
-
 @Controller({
   path: 'products',
   version: '1',
@@ -28,22 +34,18 @@ import { AuthGuard } from 'src/guards/auth.guard';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-
-  @Roles(userType.NOTADMIN,userType.ADMIN)
-  @Get( )
+  @Roles(userType.NOTADMIN, userType.ADMIN)
+  @Get()
   async getAllProducts(
     @Query('approved') approvedStatus?: boolean,
-    @User() user?:UserType
+    @User() user?: UserType,
   ): Promise<ProductEntity[]> {
-    console.log(user)
-    
+    console.log(user);
+
     return await this.productsService.getAllProductsService(approvedStatus);
   }
 
-
-
-
-  @Roles(userType.NOTADMIN,userType.ADMIN)
+  @Roles(userType.NOTADMIN, userType.ADMIN)
   @Get(':id')
   async getProductByID(
     @Param('id', ParseUUIDPipe) id: string,
@@ -51,55 +53,40 @@ export class ProductsController {
     return await this.productsService.getProductByIDService(id);
   }
 
-
-
-
-
-  @Roles(userType.NOTADMIN,userType.ADMIN)
+  @Roles(userType.NOTADMIN, userType.ADMIN)
   @Post('/create')
   async createProduct(
     @Body() productDTO: ProductCreateReq,
-    @User() user?:UserType
+    @User() user?: UserType,
   ): Promise<ProductEntity> {
-    return await this.productsService.createProductService(productDTO,user.userId);
+    return await this.productsService.createProductService(
+      productDTO,
+      user.userId,
+    );
   }
 
-
-
-
-
-
-
-  @Roles(userType.NOTADMIN,userType.ADMIN)
+  @Roles(userType.NOTADMIN, userType.ADMIN)
   @Put('/update/:id')
   async updateProduct(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() productUpdateDTO: ProductUpdateReq,
-    @User() user?:UserType
+    @User() user?: UserType,
   ): Promise<ProductEntity> {
-
-    try{
-       //for finde creator of home with id in query
-    const userCreator=await this.productsService.getUserIdByhomeId(id);
-    //for check the creator prodcuts is equal to jwt request
-    if(userCreator.id!==user.userId){
+    try {
+      //for finde creator of home with id in query
+      const userCreator = await this.productsService.getUserIdByhomeId(id);
+      //for check the creator prodcuts is equal to jwt request
+      if (userCreator.id !== user.userId) {
+        throw new UnauthorizedException();
+      }
+    } catch (error) {
       throw new UnauthorizedException();
     }
-  }catch(error){
-    throw new UnauthorizedException();
-    
+    return await this.productsService.updateProductService(
+      id,
+      productUpdateDTO,
+    );
   }
-  return await this.productsService.updateProductService(
-    id,
-    productUpdateDTO,
-  );
-}
-
-   
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-
-
-
 
   @Roles(userType.ADMIN)
   @Post('/approve/:id')
@@ -109,27 +96,24 @@ export class ProductsController {
     return await this.productsService.approveProductService(id);
   }
 
-
-
-  
-  @Roles(userType.NOTADMIN,userType.ADMIN)
+  @Roles(userType.NOTADMIN, userType.ADMIN)
   @Delete(':id')
-  async deleteProduct(@Param('id', ParseUUIDPipe) id: string, @User() user?:UserType): Promise<string> {
-
-    try{
+  async deleteProduct(
+    @Param('id', ParseUUIDPipe) id: string,
+    @User() user?: UserType,
+  ): Promise<string> {
+    try {
       //for finde creator of home with id in query
-      const userCreator=await this.productsService.getUserIdByhomeId(id);
+      const userCreator = await this.productsService.getUserIdByhomeId(id);
       //for check the creator prodcuts is equal to jwt request
-      if(userCreator.id!==user.userId){
+      if (userCreator.id !== user.userId) {
         throw new UnauthorizedException();
       }
-  
+
       return await this.productsService.deleteProductService(id);
-
-    }catch(error){
-      throw new UnauthorizedException()
+    } catch (error) {
+      throw new UnauthorizedException();
     }
-
   }
   @Post('/test')
   @UseInterceptors(
@@ -147,4 +131,3 @@ export class ProductsController {
     return 'success'; //await this.productsService.createProductService(productDTO);
   }
 }
- 
