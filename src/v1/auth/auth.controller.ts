@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { UserCreateReq, UserLoginReq } from './dtos/users.dto';
 import { Body } from '@nestjs/common/decorators';
 import * as bcrypt from 'bcrypt';
+import { User, UserType } from '../decorators/user.decorator';
 
 @Controller({
   path: 'auth',
@@ -13,7 +14,8 @@ export class AuthController {
 
   //for login api
   @Post('login')
-  async loginUser(@Body() userLoginDto: UserLoginReq) {
+  async loginUser(@Body() userLoginDto: UserLoginReq ) {
+    // console.log(user)
     const existingUser = await this.authServices.findeByEmail(
       userLoginDto.email,
     );
@@ -64,9 +66,10 @@ export class AuthController {
 
 
   @Get('redis')
-  async testRedis(){
-     const result= await this.authServices.getTokenRedis("moein")
-     console.log(result)
+  async testRedis( @User() user :UserType ){
+    console.log(user,"test")
+     const result= await this.authServices.getTokenRedis("mahdiyarjfr@gmail.com")
+      return result
     // return this.authServices.getData("sss")
   }
 }
