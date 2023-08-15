@@ -24,7 +24,6 @@ async function bootstrap() {
   //Enabling Prisma
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
-
   //Enabling class-validator and class-transformer
   app.useGlobalPipes(
     new ValidationPipe({
