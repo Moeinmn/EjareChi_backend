@@ -28,15 +28,6 @@
         "tsConfigPath": "apps/auth/tsconfig.app.json"
       }
     },
-    "property": {
-      "type": "application",
-      "root": "apps/property",
-      "entryFile": "main",
-      "sourceRoot": "apps/property/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/property/tsconfig.app.json"
-      }
-    },
     "common": {
       "type": "library",
       "root": "libs/common",
@@ -44,6 +35,15 @@
       "sourceRoot": "libs/common/src",
       "compilerOptions": {
         "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
+    },
+    "rental": {
+      "type": "application",
+      "root": "apps/rental",
+      "entryFile": "main",
+      "sourceRoot": "apps/rental/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rental/tsconfig.app.json"
       }
     }
   }
