@@ -3,6 +3,7 @@ import { AuthModule } from './auth.module';
 import { ConfigService } from '@nestjs/config';
 import { Logger } from 'nestjs-pino';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { PrismaService } from '@app/common/prisma/prisma.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AuthModule);
@@ -29,8 +30,8 @@ async function bootstrap() {
   );
   
   //Enabling Prisma
-  //const prismaService = app.get(PrismaService);
-  //await prismaService.enableShutdownHooks(app);
+  const prismaService = app.get(PrismaService);
+  await prismaService.enableShutdownHooks(app);
 
   const PORT = configService.get("HTTP_PORT");
   console.log(PORT);
