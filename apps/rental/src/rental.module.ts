@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { RentalController } from './rental.controller';
-import { RentalService } from './Rental.service';
+import { RentalService } from './rental.service';
 import { PrismaModule } from '@app/common';
 
 @Module({

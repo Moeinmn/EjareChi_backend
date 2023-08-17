@@ -15,7 +15,7 @@ import {
   UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
-import { RentalService } from './Rental.service';
+import { RentalService } from './rental.service';
 import {
   RentalCreateReq,
   RentalEntity,
