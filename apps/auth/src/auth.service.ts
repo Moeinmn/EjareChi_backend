@@ -1,10 +1,10 @@
 import { Injectable, Inject  } from '@nestjs/common';
-import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { UserCreateReq, UserEntity } from './dtos/users.dto';
 // import { JwtService } from '@nestjs/jwt';
 import * as jwt from "jsonwebtoken"
 import * as bcrypt from 'bcrypt';
 import { Redis } from 'ioredis';
+import { PrismaService } from '@app/common/prisma/prisma.service';
 
 
 @Injectable()
