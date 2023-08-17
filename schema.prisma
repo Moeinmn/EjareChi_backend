@@ -18,11 +18,11 @@ model users {
   created_at   DateTime  @default(now())
   updated_at   DateTime @updatedAt
   user_type     userType @default(NOTADMIN)
-  pruducts      products[]
+  pruducts      rentals[]
  
 }
 
-model products {
+model rentals {
   id           String @id @default(uuid())
   name         String @db.VarChar(255)
   description  String @db.Text()
@@ -41,7 +41,7 @@ model image{
   id           String @id @default(uuid())
   url          String
   product_id   String 
-  product      products @relation(fields: [product_id],references: [id])
+  product      rentals @relation(fields: [product_id],references: [id])
   created_at   DateTime  @default(now())
   updated_at   DateTime @updatedAt
 }
