@@ -36,6 +36,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/rental/tsconfig.app.json"
       }
+    },
+    "micro": {
+      "type": "application",
+      "root": "apps/micro",
+      "entryFile": "main",
+      "sourceRoot": "apps/micro/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/micro/tsconfig.app.json"
+      }
     }
   }
 }
