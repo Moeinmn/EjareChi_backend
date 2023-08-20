@@ -45,6 +45,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/micro/tsconfig.app.json"
       }
+    },
+    "sicro": {
+      "type": "application",
+      "root": "apps/sicro",
+      "entryFile": "main",
+      "sourceRoot": "apps/sicro/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/sicro/tsconfig.app.json"
+      }
     }
   }
 }
