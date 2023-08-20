@@ -3,18 +3,18 @@ import { AuthService } from './auth.service';
 import { UserCreateReq, UserLoginReq } from './dtos/users.dto';
 import { Body } from '@nestjs/common/decorators';
 import * as bcrypt from 'bcrypt';
-import { User, UserType } from '../decorators/user.decorator';
+import { User, UserType } from '../../../../../libs/common/src/decorators/user.decorator';
 
 @Controller({
   path: 'auth',
   version: '1',
 })
 export class AuthController {
-  constructor(private readonly authServices: AuthService) {}
+  constructor(private readonly authServices: AuthService) { }
 
   //for login api
   @Post('login')
-  async loginUser(@Body() userLoginDto: UserLoginReq ) {
+  async loginUser(@Body() userLoginDto: UserLoginReq) {
     // console.log(user)
     const existingUser = await this.authServices.findeByEmail(
       userLoginDto.email,
@@ -22,20 +22,20 @@ export class AuthController {
     if (!existingUser) {
       return { message: 'user is not found!' };
     }
-    
+
     const resultComapre = await bcrypt.compare(
       userLoginDto.password,
       existingUser.passwordHash,
     );
     if (resultComapre) {
-      const cachedToken= await this.authServices.getTokenRedis(userLoginDto.email);
-      if(cachedToken){
+      const cachedToken = await this.authServices.getTokenRedis(userLoginDto.email);
+      if (cachedToken) {
         console.log("use cached token")
         return { access_token: cachedToken };
 
-      }else{
+      } else {
         const token = await this.authServices.generateToken(existingUser.id);
-        await this.authServices.setTokenRedis(userLoginDto.email,token)
+        await this.authServices.setTokenRedis(userLoginDto.email, token)
         console.log("use fresh token")
 
         return { access_token: token };
@@ -59,17 +59,17 @@ export class AuthController {
 
     const userCreated = await this.authServices.creatUser(userCreatDTO);
     const token = await this.authServices.generateToken(userCreated.id);
-    await this.authServices.setTokenRedis(userCreatDTO.email,token)
+    await this.authServices.setTokenRedis(userCreatDTO.email, token)
     return { access_token: token };
   }
 
 
 
   @Get('redis')
-  async testRedis( @User() user :UserType ){
-    console.log(user,"test")
-     const result= await this.authServices.getTokenRedis("mahdiyarjfr@gmail.com")
-      return result
+  async testRedis(@User() user: UserType) {
+    console.log(user, "test")
+    const result = await this.authServices.getTokenRedis("mahdiyarjfr@gmail.com")
+    return result
     // return this.authServices.getData("sss")
   }
 }

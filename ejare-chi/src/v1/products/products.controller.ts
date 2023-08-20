@@ -22,9 +22,9 @@ import {
   ProductUpdateReq,
 } from './dtos/products.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { User, UserType } from '../decorators/user.decorator';
+import { User, UserType } from '../../../../../libs/common/src/decorators/user.decorator';
 import { userType } from '@prisma/client';
-import { Roles } from '../decorators/roles.decorator';
+import { Roles } from '../../../../../libs/common/src/decorators/roles.decorator';
 import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller({
@@ -32,7 +32,7 @@ import { AuthGuard } from 'src/guards/auth.guard';
   version: '1',
 })
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(private readonly productsService: ProductsService) { }
 
   @Roles(userType.NOTADMIN, userType.ADMIN)
   @Get()

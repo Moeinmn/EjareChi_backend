@@ -1,8 +1,8 @@
+import { PrismaService } from "@app/common/prisma/prisma.service";
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { userType } from "@prisma/client";
 import * as jwt from "jsonwebtoken"
-import { PrismaService } from "src/infrastructure/prisma/prisma.service";
 
 interface payloadJWT{
    

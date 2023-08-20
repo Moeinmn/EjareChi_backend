@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { UserCreateReq, UserLoginReq } from './dtos/users.dto';
 import { Body } from '@nestjs/common/decorators';
 import * as bcrypt from 'bcrypt';
-import { User, UserType } from '../decorators/user.decorator';
+import { User, UserType } from '@app/common/decorators';
 
 @Controller({
   path: 'auth',
