@@ -7,9 +7,11 @@ for app in $(cd ./apps && ls); do
     initCMD+=" \"npx nest start ${app%/*}\""
 done
 
+echo "$initCMD"
 eval "$initCMD"
 
-
+# For not closing terminal if we face an error
+read -p "Press any key to continue" x
 
 
 
