@@ -1,23 +1,17 @@
-x=$(for f in $(cd ./apps && ls); do echo "${f%/*}"; done | sort -u )
-for item in "${x[@]}"; { 
-    echo "$item"; 
+initCMD='npx concurrently'
 
-     npx nest start $item
-    
-    }
+cyanColor="\033[0;36m"
 
-# # Loop through each subdirectory and start the Nest.js app
-# for dir in "${SUBDIRECTORIES[@]}"; do
-#   cd "$dir"
-#   echo "Starting Nest.js app in $dir..."
-#   npx nest start
-#   cd "$PARENT_DIR"
-# done
+for app in $(cd ./apps && ls); do
+    echo -e "${cyanColor}${app%/*} service starting ..."
+    initCMD+=" \"npx nest start ${app%/*}\""
+done
 
+echo "$initCMD"
+eval "$initCMD"
 
-# Pause to keep the terminal open
-read -p "Press any key to exit..."
-
+# For not closing terminal if we face an error
+read -p "Press any key to continue" x
 
 
 
