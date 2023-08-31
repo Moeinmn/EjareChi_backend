@@ -1,0 +1,12 @@
+services:
+  booking:
+    build: 
+      context: .
+      dockerfile: ./apps/booking/Dockerfile
+    command: npx nest start booking
+    # env_file:
+    #   - ./apps/booking/.env
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app  

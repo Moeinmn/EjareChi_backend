@@ -2,7 +2,7 @@ FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
-COPy package*.json .
+COPY package*.json .
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
 
