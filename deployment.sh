@@ -4,3 +4,5 @@ docker build -t booking -f . ../..
 
 # Running all docker images
 docker compose up
+
+# Building whole backend in one image
