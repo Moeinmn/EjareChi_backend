@@ -31,11 +31,11 @@ async function bootstrap() {
   
   //Enabling Prisma
   const prismaService = app.get(PrismaService);
-  await prismaService.enableShutdownHooks(app);
+  //await prismaService.enableShutdownHooks(app);
 
   const PORT = configService.get("HTTP_PORT");
   console.log(PORT);
 
-  await app.listen(5000);
+  await app.listen(10003);
 }
 bootstrap();

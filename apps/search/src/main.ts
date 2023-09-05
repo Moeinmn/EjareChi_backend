@@ -3,6 +3,6 @@ import { SearchModule } from './search.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(SearchModule);
-  await app.listen(3000);
+  await app.listen(10004);
 }
 bootstrap();
