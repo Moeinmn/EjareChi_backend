@@ -6,9 +6,8 @@ name: deploy to remote server
 # or API.
 on:
   push:
-    branches: [ master ]
-    tags:        
-      - '*'  
+    tags:
+      - v*
 jobs:
   execute_ssh:
     runs-on: ubuntu-latest
@@ -24,6 +23,7 @@ jobs:
         command_timeout: 30m
         script: | 
           echo "Running commands!!!"
+          rm -rf EjareChi_backend
+          git clone https://github.com/Moeinmn/EjareChi_backend.git
           cd EjareChi_backend
-          git pull origin master
           docker-compose up
