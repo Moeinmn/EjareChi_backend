@@ -10,6 +10,7 @@ done
 echo "$initCMD"
 eval "$initCMD"
 
+
 # For not closing terminal if we face an error
 read -p "Press any key to continue" x
 
