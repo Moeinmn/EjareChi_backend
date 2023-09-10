@@ -23,6 +23,7 @@ jobs:
         command_timeout: 30m
         script: | 
           echo "Running commands!!!"
+          docker-compose down
           rm -rf EjareChi_backend
           git clone https://github.com/Moeinmn/EjareChi_backend.git
           cd EjareChi_backend
