@@ -3,6 +3,7 @@ import { RentalController } from './rental.controller';
 import { RentalService } from './rental.service';
 import { CustomLoggerModule, PrismaModule } from '@app/common';
 import { ConfigModule } from '@nestjs/config';
+import { CategoriesController } from './categories.controller';
 
 @Module({
   imports: [PrismaModule,
@@ -18,7 +19,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     CustomLoggerModule,
   ],
-  controllers: [RentalController],
+  controllers: [RentalController , CategoriesController],
   providers: [RentalService],
 })
 export class RentalModule {}

@@ -27,7 +27,7 @@ import { userType } from '@prisma/client';
 import { Roles, User, UserType } from '@app/common';
 
 @Controller({
-  path: 'rental',
+  path: 'rentals',
   version: '1',
 })
 export class RentalController {

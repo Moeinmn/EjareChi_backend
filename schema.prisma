@@ -30,8 +30,8 @@ model rentals {
   user_id     String
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
-  latitude    Float
-  longitude   Float
+  latitude    Float    @default(35.7219)
+  longitude   Float    @default(51.3347)
   images      image[]
   user        users    @relation(fields: [user_id], references: [id])
 }
@@ -48,6 +48,7 @@ model image {
 model Category {
   category_id        Int                 @id @default(autoincrement())
   name               String
+  icon_name          String?
   parent_category_id Int?
   created_at         DateTime            @default(now())
   updated_at         DateTime            @updatedAt
@@ -61,10 +62,14 @@ model CategoryAttribute {
   id         Int      @id @default(autoincrement())
   name       String
   dataType   String // This field stores the data type (e.g., "integer", "boolean")
+  required   Boolean  @default(false)
   category   Category @relation(fields: [categoryId], references: [category_id])
   categoryId Int
   // Add other relevant fields, such as validation rules or descriptions
 }
+
+// TODO : 
+// Category_Types = "car" | "bike" 
 
 enum userType {
   ADMIN
