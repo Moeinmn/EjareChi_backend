@@ -45,16 +45,27 @@ model image {
   product    rentals  @relation(fields: [product_id], references: [id])
 }
 
-model categories {
-  category_id   Int       @id @default(autoincrement())
-  name          String
+model Category {
+  category_id        Int                 @id @default(autoincrement())
+  name               String
   parent_category_id Int?
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
+  created_at         DateTime            @default(now())
+  updated_at         DateTime            @updatedAt
   // Define a self-referential relationship for subcategories
   // subcategories Category[] @relation("ParentCategoryToSubcategory")
   // parent_category Category? @relation("ParentCategoryToSubcategory", fields: [parent_category_id], references: [category_id])
+  CategoryAttribute  CategoryAttribute[]
 }
+
+model CategoryAttribute {
+  id         Int      @id @default(autoincrement())
+  name       String
+  dataType   String // This field stores the data type (e.g., "integer", "boolean")
+  category   Category @relation(fields: [categoryId], references: [category_id])
+  categoryId Int
+  // Add other relevant fields, such as validation rules or descriptions
+}
+
 enum userType {
   ADMIN
   NOTADMIN
