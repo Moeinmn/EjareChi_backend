@@ -14,6 +14,7 @@ import {
   Put,
   UnauthorizedException,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { RentalService } from './rental.service';
 import {
@@ -42,6 +43,23 @@ export class RentalController {
     console.log(user);
 
     return await this.rentalService.getAllRentalsService(approvedStatus);
+  }
+
+  @Get('/categories')
+  async getCategories(
+  ): Promise<any> {
+    console.log();
+
+    return await this.rentalService.getAllCategoriesService();
+  }
+
+  @Get('/categories-attributes')
+  async getCategoryAttribute(
+    @Query('category-id' , ParseIntPipe) categoryID:number
+  ): Promise<any> {
+    console.log();
+
+    return await this.rentalService.getCategoryAttributesService(categoryID);
   }
 
   @Roles(userType.NOTADMIN, userType.ADMIN)
@@ -114,6 +132,7 @@ export class RentalController {
       throw new UnauthorizedException();
     }
   }
+
   @Post('/test')
   @UseInterceptors(
     FilesInterceptor('files', 7, {

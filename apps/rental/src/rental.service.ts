@@ -127,7 +127,6 @@ export class RentalService {
       throw new Error(error);
     }
   }
-
   async getUserIdByhomeId(id: string) {
     const user = await this.prismaService.rentals.findUnique({
       where: {
@@ -148,5 +147,17 @@ export class RentalService {
       throw new NotFoundException();
     }
     return user.user;
+  }
+  async getAllCategoriesService(){
+    const dbCategories = await this.prismaService.category.findMany({})
+    return dbCategories
+  }
+  async getCategoryAttributesService(categoryID:number){
+    let dbAttributes = await this.prismaService.categoryAttribute.findMany({
+      where:{
+        categoryId : categoryID
+      }
+    })    
+    return dbAttributes
   }
 }
